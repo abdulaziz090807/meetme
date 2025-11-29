@@ -10,7 +10,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
-from config.settings import config
+from meet_me_bot.config.settings import config
 import database as db
 from handlers import user_router, matching_router, admin_router
 from scheduler import scheduler_loop
@@ -57,3 +57,4 @@ async def main() -> None:
 if __name__ == "__main__":
 
     asyncio.run(main())
+
