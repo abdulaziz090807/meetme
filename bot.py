@@ -13,7 +13,10 @@ import database as db
 from handlers import user_router, matching_router, admin_router
 from scheduler import scheduler_loop
 
-# --- Flask для Keep-Alive ---
+# Flask для Keep-Alive
+from flask import Flask, jsonify
+import threading
+
 app = Flask(__name__)
 
 @app.route("/health")
@@ -22,6 +25,10 @@ def health():
 
 def run_flask():
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), use_reloader=False)
+
+if __name__ == "__main__":
+    threading.Thread(target=run_flask, daemon=True).start()
+    asyncio.run(main())
 
 # --- Логирование ---
 logging.basicConfig(
@@ -64,3 +71,4 @@ if __name__ == "__main__":
     threading.Thread(target=run_flask, daemon=True).start()
     # старт aiogram
     asyncio.run(main())
+
